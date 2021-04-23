@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="19705bbe9a38447c9f24bc30f924cc9d" Name="Diagram1">
+        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Assignments" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Courses" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.CoursesStudents" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.CoursesTrainers" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Students" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Trainers" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_Assignments_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_Assignments_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_CoursesStudents_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_CoursesTrainers_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_CoursesStudents_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_CoursesTrainers_Trainers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
