@@ -31,5 +31,10 @@ namespace IndividualProjectBrief_PartB
         public virtual ICollection<Assignments> Assignments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoursesStudents> CoursesStudents { get; set; }
+
+        public override string ToString()
+        {
+            return ($"Student ID: {StudentId}|FirstName: {FirstName}| Surname: {LastName}| Date Of Birth: {DateOfBirth}| TuitionFees: {TuitionFees}");
+        }
     }
 }

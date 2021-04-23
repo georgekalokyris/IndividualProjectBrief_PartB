@@ -27,5 +27,10 @@ namespace IndividualProjectBrief_PartB
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoursesTrainers> CoursesTrainers { get; set; }
+
+        public override string ToString()
+        {
+            return ($"Trainer Id: {TrainerId}| FirstName: {FirstName}| LastName: {LastName}| Subject: {Subject}");
+        }
     }
 }
