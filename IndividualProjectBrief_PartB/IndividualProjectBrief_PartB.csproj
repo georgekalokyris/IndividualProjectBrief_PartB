@@ -55,22 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllCourses.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AllStudents.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AllTrainers.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
     <Compile Include="Assignments.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Assignments_per_Course_per_Student.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Assignment_per_Course.cs">
       <DependentUpon>ModelSchool.tt</DependentUpon>
     </Compile>
     <Compile Include="Courses.cs">
@@ -106,19 +91,7 @@
     <Compile Include="Students.cs">
       <DependentUpon>ModelSchool.tt</DependentUpon>
     </Compile>
-    <Compile Include="Students_In_More_Than_One_Course.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Students_per_Course.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
     <Compile Include="Trainers.cs">
-      <DependentUpon>ModelSchool.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Trainers_per_Course.cs">
       <DependentUpon>ModelSchool.tt</DependentUpon>
     </Compile>
   </ItemGroup>

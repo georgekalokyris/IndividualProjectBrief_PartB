@@ -10,13 +10,13 @@
             <PropertyRef Name="AssignmentId" />
           </Key>
           <Property Name="AssignmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="SubDateTime" Type="datetime" />
+          <Property Name="SubDateTime" Type="datetime" Nullable="false" />
           <Property Name="OralMark" Type="int" />
           <Property Name="TotalMark" Type="int" />
-          <Property Name="CourseId" Type="int" />
-          <Property Name="StudentId" Type="int" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Courses">
           <Key>
@@ -55,16 +55,6 @@
           <Property Name="DateOfBirth" Type="date" />
           <Property Name="TuitionFees" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Trainers">
           <Key>
             <PropertyRef Name="TrainerId" />
@@ -75,110 +65,23 @@
           <Property Name="Subject" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'IndividualProjectBrief_Part_B.dbo.AllAssignments' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="AllAssignments">
-          <Property Name="Assignment_Title" Type="nvarchar(max)" />
-          <Property Name="Assignment_Description" Type="nvarchar(max)" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.AllCourses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="AllCourses">
-          <Key>
-            <PropertyRef Name="CourseId" />
-          </Key>
-          <Property Name="CourseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" />
-          <Property Name="Stream" Type="nvarchar(max)" />
-          <Property Name="Type" Type="nvarchar(max)" />
-          <Property Name="Start_Date" Type="date" />
-          <Property Name="End_Date" Type="date" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.AllStudents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="AllStudents">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" />
-          <Property Name="LastName" Type="nvarchar(max)" />
-          <Property Name="DateOfBirth" Type="date" />
-          <Property Name="TuitionFees" Type="int" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.AllTrainers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="AllTrainers">
-          <Key>
-            <PropertyRef Name="TrainerId" />
-          </Key>
-          <Property Name="TrainerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" />
-          <Property Name="LastName" Type="nvarchar(max)" />
-          <Property Name="Subject" Type="nvarchar(max)" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Assignment_per_Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Assignment_per_Course">
-          <Key>
-            <PropertyRef Name="CourseId" />
-          </Key>
-          <Property Name="Assignment_Title" Type="nvarchar(max)" />
-          <Property Name="CourseId" Type="int" Nullable="false" />
-          <Property Name="Course_Title" Type="nvarchar(max)" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Assignments_per_Course_per_Student' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Assignments_per_Course_per_Student">
-          <Key>
-            <PropertyRef Name="CourseId" />
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="Assignment_Title" Type="nvarchar(max)" />
-          <Property Name="CourseId" Type="int" Nullable="false" />
-          <Property Name="Course_Title" Type="nvarchar(max)" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="Student_FirstName" Type="nvarchar(max)" />
-          <Property Name="Student_LastName" Type="nvarchar(max)" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Students_In_More_Than_One_Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Students_In_More_Than_One_Course">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" />
-          <Property Name="LastName" Type="nvarchar(max)" />
-          <Property Name="NumberOfCourses" Type="int" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Students_per_Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Students_per_Course">
-          <Key>
-            <PropertyRef Name="CourseId" />
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="CourseId" Type="int" Nullable="false" />
-          <Property Name="Course_Title" Type="nvarchar(max)" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="Student_FirstName" Type="nvarchar(max)" />
-          <Property Name="Student_LastName" Type="nvarchar(max)" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Trainers_per_Course">
-          <Key>
-            <PropertyRef Name="TrainerId" />
-            <PropertyRef Name="CourseId" />
-          </Key>
-          <Property Name="TrainerId" Type="int" Nullable="false" />
-          <Property Name="Trainer_FirstName" Type="nvarchar(max)" />
-          <Property Name="Trainer_LastName" Type="nvarchar(max)" />
-          <Property Name="CourseId" Type="int" Nullable="false" />
-          <Property Name="Course_Title" Type="nvarchar(max)" />
-        </EntityType>
         <Association Name="FK_Assignments_Courses">
-          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
           <End Role="Assignments" Type="Self.Assignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Courses">
@@ -190,7 +93,7 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Assignments_Students">
-          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
           <End Role="Assignments" Type="Self.Assignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Students">
@@ -257,78 +160,7 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
           <EntitySet Name="CoursesStudents" EntityType="Self.CoursesStudents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoursesTrainers" EntityType="Self.CoursesTrainers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trainers" EntityType="Self.Trainers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AllCourses" EntityType="Self.AllCourses" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AllCourses].[CourseId] AS [CourseId], 
-    [AllCourses].[Title] AS [Title], 
-    [AllCourses].[Stream] AS [Stream], 
-    [AllCourses].[Type] AS [Type], 
-    [AllCourses].[Start_Date] AS [Start_Date], 
-    [AllCourses].[End_Date] AS [End_Date]
-    FROM [dbo].[AllCourses] AS [AllCourses]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="AllStudents" EntityType="Self.AllStudents" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AllStudents].[StudentId] AS [StudentId], 
-    [AllStudents].[FirstName] AS [FirstName], 
-    [AllStudents].[LastName] AS [LastName], 
-    [AllStudents].[DateOfBirth] AS [DateOfBirth], 
-    [AllStudents].[TuitionFees] AS [TuitionFees]
-    FROM [dbo].[AllStudents] AS [AllStudents]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="AllTrainers" EntityType="Self.AllTrainers" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [AllTrainers].[TrainerId] AS [TrainerId], 
-    [AllTrainers].[FirstName] AS [FirstName], 
-    [AllTrainers].[LastName] AS [LastName], 
-    [AllTrainers].[Subject] AS [Subject]
-    FROM [dbo].[AllTrainers] AS [AllTrainers]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Assignment_per_Course" EntityType="Self.Assignment_per_Course" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Assignment_per_Course].[Assignment_Title] AS [Assignment_Title], 
-    [Assignment_per_Course].[CourseId] AS [CourseId], 
-    [Assignment_per_Course].[Course_Title] AS [Course_Title]
-    FROM [dbo].[Assignment_per_Course] AS [Assignment_per_Course]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Assignments_per_Course_per_Student" EntityType="Self.Assignments_per_Course_per_Student" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Assignments_per_Course_per_Student].[Assignment_Title] AS [Assignment_Title], 
-    [Assignments_per_Course_per_Student].[CourseId] AS [CourseId], 
-    [Assignments_per_Course_per_Student].[Course_Title] AS [Course_Title], 
-    [Assignments_per_Course_per_Student].[StudentId] AS [StudentId], 
-    [Assignments_per_Course_per_Student].[Student_FirstName] AS [Student_FirstName], 
-    [Assignments_per_Course_per_Student].[Student_LastName] AS [Student_LastName]
-    FROM [dbo].[Assignments_per_Course_per_Student] AS [Assignments_per_Course_per_Student]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Students_In_More_Than_One_Course" EntityType="Self.Students_In_More_Than_One_Course" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Students_In_More_Than_One_Course].[StudentId] AS [StudentId], 
-    [Students_In_More_Than_One_Course].[FirstName] AS [FirstName], 
-    [Students_In_More_Than_One_Course].[LastName] AS [LastName], 
-    [Students_In_More_Than_One_Course].[NumberOfCourses] AS [NumberOfCourses]
-    FROM [dbo].[Students_In_More_Than_One_Course] AS [Students_In_More_Than_One_Course]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Students_per_Course" EntityType="Self.Students_per_Course" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Students_per_Course].[CourseId] AS [CourseId], 
-    [Students_per_Course].[Course_Title] AS [Course_Title], 
-    [Students_per_Course].[StudentId] AS [StudentId], 
-    [Students_per_Course].[Student_FirstName] AS [Student_FirstName], 
-    [Students_per_Course].[Student_LastName] AS [Student_LastName]
-    FROM [dbo].[Students_per_Course] AS [Students_per_Course]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Trainers_per_Course" EntityType="Self.Trainers_per_Course" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Trainers_per_Course].[TrainerId] AS [TrainerId], 
-    [Trainers_per_Course].[Trainer_FirstName] AS [Trainer_FirstName], 
-    [Trainers_per_Course].[Trainer_LastName] AS [Trainer_LastName], 
-    [Trainers_per_Course].[CourseId] AS [CourseId], 
-    [Trainers_per_Course].[Course_Title] AS [Course_Title]
-    FROM [dbo].[Trainers_per_Course] AS [Trainers_per_Course]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Assignments_Courses" Association="Self.FK_Assignments_Courses">
             <End Role="Courses" EntitySet="Courses" />
             <End Role="Assignments" EntitySet="Assignments" />
@@ -363,13 +195,13 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
             <PropertyRef Name="AssignmentId" />
           </Key>
           <Property Name="AssignmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SubDateTime" Type="DateTime" Precision="3" />
+          <Property Name="SubDateTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="OralMark" Type="Int32" />
           <Property Name="TotalMark" Type="Int32" />
-          <Property Name="CourseId" Type="Int32" />
-          <Property Name="StudentId" Type="Int32" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Courses" Relationship="Self.FK_Assignments_Courses" FromRole="Assignments" ToRole="Courses" />
           <NavigationProperty Name="Students" Relationship="Self.FK_Assignments_Students" FromRole="Assignments" ToRole="Students" />
         </EntityType>
@@ -419,16 +251,6 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
           <NavigationProperty Name="Assignments" Relationship="Self.FK_Assignments_Students" FromRole="Students" ToRole="Assignments" />
           <NavigationProperty Name="CoursesStudents" Relationship="Self.FK_CoursesStudents_Students" FromRole="Students" ToRole="CoursesStudents" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Trainers">
           <Key>
             <PropertyRef Name="TrainerId" />
@@ -440,7 +262,7 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
           <NavigationProperty Name="CoursesTrainers" Relationship="Self.FK_CoursesTrainers_Trainers" FromRole="Trainers" ToRole="CoursesTrainers" />
         </EntityType>
         <Association Name="FK_Assignments_Courses">
-          <End Role="Courses" Type="Self.Courses" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
           <End Role="Assignments" Type="Self.Assignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Courses">
@@ -452,7 +274,7 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Assignments_Students">
-          <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
           <End Role="Assignments" Type="Self.Assignments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Students">
@@ -519,7 +341,6 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
           <EntitySet Name="CoursesStudents" EntityType="Self.CoursesStudents" />
           <EntitySet Name="CoursesTrainers" EntityType="Self.CoursesTrainers" />
           <EntitySet Name="Students" EntityType="Self.Students" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Trainers" EntityType="Self.Trainers" />
           <AssociationSet Name="FK_Assignments_Courses" Association="Self.FK_Assignments_Courses">
             <End Role="Courses" EntitySet="Courses" />
@@ -545,96 +366,7 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
             <End Role="Trainers" EntitySet="Trainers" />
             <End Role="CoursesTrainers" EntitySet="CoursesTrainers" />
           </AssociationSet>
-          <EntitySet Name="AllCourses" EntityType="IndividualProjectBrief_Part_BModel.AllCourses" />
-          <EntitySet Name="AllStudents" EntityType="IndividualProjectBrief_Part_BModel.AllStudents" />
-          <EntitySet Name="AllTrainers" EntityType="IndividualProjectBrief_Part_BModel.AllTrainers" />
-          <EntitySet Name="Assignment_per_Course" EntityType="IndividualProjectBrief_Part_BModel.Assignment_per_Course" />
-          <EntitySet Name="Assignments_per_Course_per_Student" EntityType="IndividualProjectBrief_Part_BModel.Assignments_per_Course_per_Student" />
-          <EntitySet Name="Students_In_More_Than_One_Course" EntityType="IndividualProjectBrief_Part_BModel.Students_In_More_Than_One_Course" />
-          <EntitySet Name="Students_per_Course" EntityType="IndividualProjectBrief_Part_BModel.Students_per_Course" />
-          <EntitySet Name="Trainers_per_Course" EntityType="IndividualProjectBrief_Part_BModel.Trainers_per_Course" />
         </EntityContainer>
-        <EntityType Name="AllCourses">
-          <Key>
-            <PropertyRef Name="CourseId" />
-          </Key>
-          <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Stream" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Start_Date" Type="DateTime" Precision="0" />
-          <Property Name="End_Date" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="AllStudents">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
-          <Property Name="TuitionFees" Type="Int32" />
-        </EntityType>
-        <EntityType Name="AllTrainers">
-          <Key>
-            <PropertyRef Name="TrainerId" />
-          </Key>
-          <Property Name="TrainerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Assignment_per_Course">
-          <Key>
-            <PropertyRef Name="CourseId" />
-          </Key>
-          <Property Name="Assignment_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="Course_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Assignments_per_Course_per_Student">
-          <Key>
-            <PropertyRef Name="CourseId" />
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="Assignment_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="Course_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="Student_FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Student_LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Students_In_More_Than_One_Course">
-          <Key>
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NumberOfCourses" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Students_per_Course">
-          <Key>
-            <PropertyRef Name="CourseId" />
-            <PropertyRef Name="StudentId" />
-          </Key>
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="Course_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StudentId" Type="Int32" Nullable="false" />
-          <Property Name="Student_FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Student_LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Trainers_per_Course">
-          <Key>
-            <PropertyRef Name="TrainerId" />
-            <PropertyRef Name="CourseId" />
-          </Key>
-          <Property Name="TrainerId" Type="Int32" Nullable="false" />
-          <Property Name="Trainer_FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Trainer_LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" />
-          <Property Name="Course_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -696,17 +428,6 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Trainers">
             <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.Trainers">
               <MappingFragment StoreEntitySet="Trainers">
@@ -714,92 +435,6 @@ warning 6002: The table/view 'IndividualProjectBrief_Part_B.dbo.Trainers_per_Cou
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AllCourses">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.AllCourses">
-              <MappingFragment StoreEntitySet="AllCourses">
-                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
-                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Stream" ColumnName="Stream" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AllStudents">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.AllStudents">
-              <MappingFragment StoreEntitySet="AllStudents">
-                <ScalarProperty Name="TuitionFees" ColumnName="TuitionFees" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AllTrainers">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.AllTrainers">
-              <MappingFragment StoreEntitySet="AllTrainers">
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Assignment_per_Course">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.Assignment_per_Course">
-              <MappingFragment StoreEntitySet="Assignment_per_Course">
-                <ScalarProperty Name="Course_Title" ColumnName="Course_Title" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="Assignment_Title" ColumnName="Assignment_Title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Assignments_per_Course_per_Student">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.Assignments_per_Course_per_Student">
-              <MappingFragment StoreEntitySet="Assignments_per_Course_per_Student">
-                <ScalarProperty Name="Student_LastName" ColumnName="Student_LastName" />
-                <ScalarProperty Name="Student_FirstName" ColumnName="Student_FirstName" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="Course_Title" ColumnName="Course_Title" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="Assignment_Title" ColumnName="Assignment_Title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Students_In_More_Than_One_Course">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.Students_In_More_Than_One_Course">
-              <MappingFragment StoreEntitySet="Students_In_More_Than_One_Course">
-                <ScalarProperty Name="NumberOfCourses" ColumnName="NumberOfCourses" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Students_per_Course">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.Students_per_Course">
-              <MappingFragment StoreEntitySet="Students_per_Course">
-                <ScalarProperty Name="Student_LastName" ColumnName="Student_LastName" />
-                <ScalarProperty Name="Student_FirstName" ColumnName="Student_FirstName" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-                <ScalarProperty Name="Course_Title" ColumnName="Course_Title" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Trainers_per_Course">
-            <EntityTypeMapping TypeName="IndividualProjectBrief_Part_BModel.Trainers_per_Course">
-              <MappingFragment StoreEntitySet="Trainers_per_Course">
-                <ScalarProperty Name="Course_Title" ColumnName="Course_Title" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="Trainer_LastName" ColumnName="Trainer_LastName" />
-                <ScalarProperty Name="Trainer_FirstName" ColumnName="Trainer_FirstName" />
-                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

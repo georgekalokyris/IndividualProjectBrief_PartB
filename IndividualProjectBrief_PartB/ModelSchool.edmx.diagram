@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.CoursesStudents" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.CoursesTrainers" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Students" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Trainers" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_Assignments_Courses" ManuallyRouted="false" />
         <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_Assignments_Students" ManuallyRouted="false" />
@@ -18,14 +17,6 @@
         <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_CoursesTrainers_Courses" ManuallyRouted="false" />
         <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_CoursesStudents_Students" ManuallyRouted="false" />
         <AssociationConnector Association="IndividualProjectBrief_Part_BModel.FK_CoursesTrainers_Trainers" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.AllCourses" Width="1.5" PointX="5.375" PointY="7.75" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.AllStudents" Width="1.5" PointX="7.375" PointY="7.75" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.AllTrainers" Width="1.5" PointX="8.375" PointY="0.75" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Assignment_per_Course" Width="1.5" PointX="8.375" PointY="3.75" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Assignments_per_Course_per_Student" Width="1.5" PointX="10" PointY="6.25" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Students_In_More_Than_One_Course" Width="1.5" PointX="9.375" PointY="9.75" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Students_per_Course" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="IndividualProjectBrief_Part_BModel.Trainers_per_Course" Width="1.5" PointX="10.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

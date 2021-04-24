@@ -13,20 +13,14 @@ namespace IndividualProjectBrief_PartB
         {
             var builder = new StringBuilder();
 
-            if (!string.IsNullOrWhiteSpace(Title)) 
-            {
-                builder.AppendFormat("Assignment Title: {0}", Title);
-            }
+            builder.AppendFormat("Assignment Title: {0}", Title);
 
             if (!string.IsNullOrWhiteSpace(Description))
             {
                 builder.AppendFormat("| Description: {0}", Description);
             }
 
-            if (SubDateTime.HasValue)
-            {
-                builder.AppendFormat("| Submission Date: {0:d}", SubDateTime);
-            }
+            builder.AppendFormat("| Submission Date: {0:d}", SubDateTime);
 
             if (OralMark.HasValue)
             {

@@ -158,6 +158,28 @@ namespace IndividualProjectBrief_PartB
                     Console.WriteLine("Please enter the Assignment's total mark");
                     int totalMark = Convert.ToInt32(Console.ReadLine());
 
+                    Console.WriteLine("Courses: ");
+
+                    var coursesAndStudents = Reader.GetAllStudentsPerCourse();
+                    
+                    Program.Print(coursesAndStudents.Select(x => new SelectItem(x.Key.CourseId, x.Key.Title)));
+
+                    Console.WriteLine("Please enter the course's id for the assignment");
+
+                    int courseId = Convert.ToInt32(Console.ReadLine());
+
+                    var students = coursesAndStudents
+                        .First(x => x.Key.CourseId == courseId)
+                        .Value
+                        .Select(x => new SelectItem(x.StudentId, $"{x.FirstName} {x.LastName}"));
+
+                    Console.WriteLine("Courses: ");
+
+                    Program.Print(students);
+
+                    Console.WriteLine("Please enter the student's id for the assignment");
+                    
+                    int studentId = Convert.ToInt32(Console.ReadLine());
 
                     Assignments assignment = new Assignments()
                     {
@@ -165,7 +187,9 @@ namespace IndividualProjectBrief_PartB
                         Description = description,
                         SubDateTime = subDateTime,
                         OralMark = oralMark,
-                        TotalMark = totalMark
+                        TotalMark = totalMark,
+                        CourseId = courseId,
+                        StudentId = studentId,
                     };
 
                     Context.Assignments.Add(assignment);
@@ -542,7 +566,7 @@ namespace IndividualProjectBrief_PartB
                 }
             }
 
-            private static void Print(object obj, string prefix = null)
+            public static void Print(object obj, string prefix = null)
             {
                 if (obj is IDictionary)
                 {
@@ -567,6 +591,24 @@ namespace IndividualProjectBrief_PartB
                 }
                 Console.WriteLine();
             }
+        }
+    }
+
+    class SelectItem
+    {
+        public SelectItem(int id, string value)
+        {
+            Id = id;
+            Value = value;
+        }
+
+        public int Id { get; }
+
+        public string Value { get; }
+
+        public override string ToString()
+        {
+            return $"{Id} - {Value}";
         }
     }
 }

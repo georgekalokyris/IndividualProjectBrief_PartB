@@ -17,11 +17,11 @@ namespace IndividualProjectBrief_PartB
         public int AssignmentId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Nullable<System.DateTime> SubDateTime { get; set; }
+        public System.DateTime SubDateTime { get; set; }
         public Nullable<int> OralMark { get; set; }
         public Nullable<int> TotalMark { get; set; }
-        public Nullable<int> CourseId { get; set; }
-        public Nullable<int> StudentId { get; set; }
+        public int CourseId { get; set; }
+        public int StudentId { get; set; }
     
         public virtual Courses Courses { get; set; }
         public virtual Students Students { get; set; }
