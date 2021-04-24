@@ -35,10 +35,5 @@ namespace IndividualProjectBrief_PartB
         public virtual ICollection<CoursesStudents> CoursesStudents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CoursesTrainers> CoursesTrainers { get; set; }
-
-        public override string ToString()
-        {
-            return ($"Course Id: {CourseId}| Title: {Title}| Stream: {Stream}| Type: {Type}| Start Date: {Start_Date} | End Date: {End_Date}"); //TODO: Remove the time element
-        }
     }
 }

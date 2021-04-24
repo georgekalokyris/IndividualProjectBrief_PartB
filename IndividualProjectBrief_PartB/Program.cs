@@ -10,7 +10,7 @@ namespace IndividualProjectBrief_PartB
     class Manager
     {
 
-        public static void AddStudents() //TODO: Add Students
+        public static void AddStudents() //TODO: Add Students to Courses
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -32,8 +32,6 @@ namespace IndividualProjectBrief_PartB
 
                     Console.WriteLine("Please enter the amount of the total tuitionFees");
                     int fees = int.Parse(Console.ReadLine());
-
-                    //var student = new Students(FirstName = FirstName, LastName = LastName, DateOfBirth = DateOfBirth, Fees = Fees);
 
                     Students student = new Students()
                     {
@@ -67,7 +65,7 @@ namespace IndividualProjectBrief_PartB
         }
 
 
-        public static void AddCourses() //TODO: Add Courses
+        public static void AddCourses() 
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -133,7 +131,7 @@ namespace IndividualProjectBrief_PartB
         }
 
 
-        public static void AddAssignments() //TODO: Add Assignments
+        public static void AddAssignments() //TODO: Add Assignments to Courses and Students
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -199,7 +197,7 @@ namespace IndividualProjectBrief_PartB
         }
 
 
-        public static void AddTrainers() //TODO: Add Trainers
+        public static void AddTrainers() //TODO: Add Trainers to Courses
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -248,11 +246,11 @@ namespace IndividualProjectBrief_PartB
 
         public class Reader
         {
-            public static void GetAllStudents() //TODO: List all Students
+            public static void GetAllStudents() 
             {
                 using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
                 {
-                    var students = dbContext.Students.ToList();
+                    var students = dbContext.Students;
 
 
                     foreach (var x in students)
@@ -266,11 +264,11 @@ namespace IndividualProjectBrief_PartB
 
 
 
-            public static void GetAllCourses() //TODO: List all Courses
+            public static void GetAllCourses() 
             {
                 using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
                 {
-                    var courses = dbContext.Courses.ToList();
+                    var courses = dbContext.Courses;
 
                     foreach (var x in courses)
                     {
@@ -281,13 +279,11 @@ namespace IndividualProjectBrief_PartB
                 }
 
             }
-            public static void GetAllAssginments() //TODO: List all Assignments
+            public static void GetAllAssginments() 
             {
                 using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
                 {
-                    //var assignments = (from ta in dbContext.Assignments
-                    //                   select ta.Title).Distinct().ToList(); //TODO: This should return Assignments
-
+                   
                     var assignments = (from ta in dbContext.Assignments
                                        select ta).Distinct().ToList(); //TODO: This should return Assignments as an object 
 
@@ -299,11 +295,11 @@ namespace IndividualProjectBrief_PartB
 
             }
 
-            public static void GetAllTrainers() //TODO: List all Trainers
+            public static void GetAllTrainers() 
             {
                 using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
                 {
-                    var trainers = dbContext.Trainers.ToList();
+                    var trainers = dbContext.Trainers;
 
 
                     foreach (var x in trainers)
@@ -324,8 +320,18 @@ namespace IndividualProjectBrief_PartB
 
                 try
                 {
-
-                    Run();
+                    using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
+                    {
+                        var studentspercourse = from i in dbContext.Students_per_Course
+                                                select new { i.Student_FirstName, i.Student_LastName, i.Course_Title };
+                                                
+                        
+                        foreach (var x in studentspercourse)
+                        {
+                            Console.WriteLine(x);
+                        }
+                    }
+                        Run();
 
                 }
                 catch (Exception ex)

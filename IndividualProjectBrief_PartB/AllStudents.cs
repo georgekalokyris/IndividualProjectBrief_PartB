@@ -12,24 +12,12 @@ namespace IndividualProjectBrief_PartB
     using System;
     using System.Collections.Generic;
     
-    public partial class Students
+    public partial class AllStudents
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Students()
-        {
-            this.Assignments = new HashSet<Assignments>();
-            this.CoursesStudents = new HashSet<CoursesStudents>();
-        }
-    
         public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<int> TuitionFees { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Assignments> Assignments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoursesStudents> CoursesStudents { get; set; }
     }
 }

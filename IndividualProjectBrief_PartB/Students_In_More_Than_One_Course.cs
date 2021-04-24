@@ -12,20 +12,11 @@ namespace IndividualProjectBrief_PartB
     using System;
     using System.Collections.Generic;
     
-    public partial class Trainers
+    public partial class Students_In_More_Than_One_Course
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Trainers()
-        {
-            this.CoursesTrainers = new HashSet<CoursesTrainers>();
-        }
-    
-        public int TrainerId { get; set; }
+        public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Subject { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CoursesTrainers> CoursesTrainers { get; set; }
+        public Nullable<int> NumberOfCourses { get; set; }
     }
 }

@@ -12,18 +12,13 @@ namespace IndividualProjectBrief_PartB
     using System;
     using System.Collections.Generic;
     
-    public partial class Assignments
+    public partial class AllCourses
     {
-        public int AssignmentId { get; set; }
+        public int CourseId { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public Nullable<System.DateTime> SubDateTime { get; set; }
-        public Nullable<int> OralMark { get; set; }
-        public Nullable<int> TotalMark { get; set; }
-        public Nullable<int> CourseId { get; set; }
-        public Nullable<int> StudentId { get; set; }
-    
-        public virtual Courses Courses { get; set; }
-        public virtual Students Students { get; set; }
+        public string Stream { get; set; }
+        public string Type { get; set; }
+        public Nullable<System.DateTime> Start_Date { get; set; }
+        public Nullable<System.DateTime> End_Date { get; set; }
     }
 }

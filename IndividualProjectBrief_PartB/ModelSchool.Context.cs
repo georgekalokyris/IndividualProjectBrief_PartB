@@ -32,5 +32,13 @@ namespace IndividualProjectBrief_PartB
         public virtual DbSet<Students> Students { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Trainers> Trainers { get; set; }
+        public virtual DbSet<AllCourses> AllCourses { get; set; }
+        public virtual DbSet<AllStudents> AllStudents { get; set; }
+        public virtual DbSet<AllTrainers> AllTrainers { get; set; }
+        public virtual DbSet<Assignment_per_Course> Assignment_per_Course { get; set; }
+        public virtual DbSet<Assignments_per_Course_per_Student> Assignments_per_Course_per_Student { get; set; }
+        public virtual DbSet<Students_In_More_Than_One_Course> Students_In_More_Than_One_Course { get; set; }
+        public virtual DbSet<Students_per_Course> Students_per_Course { get; set; }
+        public virtual DbSet<Trainers_per_Course> Trainers_per_Course { get; set; }
     }
 }
