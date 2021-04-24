@@ -38,7 +38,7 @@ namespace IndividualProjectBrief_PartB
 
         public override string ToString()
         {
-            return ($"Course Id: {CourseId}| Title: {Title}| Stream: {Stream}| Type: {Type}| Start Date: {Start_Date} | End Date: {End_Date}");
+            return ($"Course Id: {CourseId}| Title: {Title}| Stream: {Stream}| Type: {Type}| Start Date: {Start_Date} | End Date: {End_Date}"); //TODO: Remove the time element
         }
     }
 }

@@ -25,5 +25,10 @@ namespace IndividualProjectBrief_PartB
     
         public virtual Courses Courses { get; set; }
         public virtual Students Students { get; set; }
+
+        public override string ToString()
+        {
+            return ($"Assignment Title: {Title}| Description: {Description}| Submission Date: {SubDateTime}| OralMark: {OralMark}| TotalMark: {TotalMark} ");
+        }
     }
 }

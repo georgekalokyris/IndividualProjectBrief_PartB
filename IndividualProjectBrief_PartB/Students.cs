@@ -34,7 +34,7 @@ namespace IndividualProjectBrief_PartB
 
         public override string ToString()
         {
-            return ($"Student ID: {StudentId}|FirstName: {FirstName}| Surname: {LastName}| Date Of Birth: {DateOfBirth}| TuitionFees: {TuitionFees}");
+            return ($"Student ID: {StudentId}|FirstName: {FirstName}| Surname: {LastName}| Date Of Birth: {DateOfBirth}| TuitionFees: {TuitionFees}"); //TODO: Remove the time element
         }
     }
 }
