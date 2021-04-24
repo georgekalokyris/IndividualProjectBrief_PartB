@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace IndividualProjectBrief_PartB
 {
@@ -65,7 +67,7 @@ namespace IndividualProjectBrief_PartB
         }
 
 
-        public static void AddCourses() 
+        public static void AddCourses()
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -246,72 +248,136 @@ namespace IndividualProjectBrief_PartB
 
         public class Reader
         {
-            public static void GetAllStudents() 
+            public static IEnumerable<Students> GetAllStudents()
             {
                 using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
                 {
-                    var students = dbContext.Students;
+                    return dbContext.Students.ToList();
+                }
+            }
 
 
-                    foreach (var x in students)
-                    {
-                        Console.WriteLine(x);
-                    }
+            public static IEnumerable<Courses> GetAllCourses()
+            {
+                using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
+                {
+                    return dbContext.Courses.ToList();
+                }
 
+            }
+            public static IEnumerable<Assignments> GetAllAssignments()
+            {
+                using (var ctx = new IndividualProjectBrief_Part_BEntities())
+                {
+                    return ctx.Assignments.Select(x => new { x.Title, x.Description }).Distinct().ToList()
+                        .Select(x => new Assignments { Title = x.Title, Description = x.Description });
+                }
+            }
+
+            public static IEnumerable<Trainers> GetAllTrainers()
+            {
+                using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
+                {
+                    return dbContext.Trainers.ToList();
                 }
 
             }
 
-
-
-            public static void GetAllCourses() 
+            public static IDictionary<Courses, IEnumerable<Students>> GetAllStudentsPerCourse()
             {
                 using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
                 {
-                    var courses = dbContext.Courses;
-
-                    foreach (var x in courses)
-                    {
-                        Console.WriteLine(x + "\n");
-                    }
-
+                    return dbContext.Courses.Include(x => x.CoursesStudents.Select(f => f.Students)).Where(x => x.CoursesStudents.Any()).ToDictionary(x => x, x => x.CoursesStudents.Select(f => f.Students));
 
                 }
-
             }
-            public static void GetAllAssginments() 
+
+            public static IDictionary<Courses, IEnumerable<Trainers>> GetAllTrainersPerCourse()
             {
                 using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
                 {
-                   
-                    var assignments = (from ta in dbContext.Assignments
-                                       select ta).Distinct().ToList(); //TODO: This should return Assignments as an object 
 
-                    foreach (var x in assignments)
-                    {
-                        Console.WriteLine(x);
-                    }
+                    return dbContext.Courses.Include(x => x.CoursesTrainers.Select(f => f.Trainers)).Where(x => x.CoursesTrainers.Any()).ToDictionary(x => x, x => x.CoursesTrainers.Select(f => f.Trainers));
                 }
-
             }
 
-            public static void GetAllTrainers() 
+            public static IDictionary<Courses, IEnumerable<Assignments>> GetAllAssginmentsPerCourse()
             {
-                using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
+                using (var ctx = new IndividualProjectBrief_Part_BEntities())
                 {
-                    var trainers = dbContext.Trainers;
+                    var dictionary = new Dictionary<Courses, IEnumerable<Assignments>>();
 
+                    var assignments = ctx.Assignments.Select(x => new { x.Title, x.Description, x.Courses })
+                        .Distinct()
+                        .ToList()
+                        .Select(x => new Assignments { Title = x.Title, Description = x.Description, Courses = x.Courses });
 
-                    foreach (var x in trainers)
+                    foreach (var assignment in assignments)
                     {
-                        Console.WriteLine(x);
+                        if (dictionary.ContainsKey(assignment.Courses))
+                        {
+                            var list = dictionary[assignment.Courses].ToList();
+                            list.Add(assignment);
+                            
+                            dictionary[assignment.Courses] = list;
+                        }
+                        else 
+                        {
+                            dictionary.Add(assignment.Courses, new Assignments[] { assignment });
+                        }
                     }
-                }
 
+                    return dictionary;
+                }
             }
 
+            public static IDictionary<Students, IDictionary<Courses, IEnumerable<Assignments>>> GetAllAssignmentsPerStudentPerCourse()
+            {
+                using (var ctx = new IndividualProjectBrief_Part_BEntities())
+                {
+                    var dictionary = new Dictionary<Students, IDictionary<Courses, IEnumerable<Assignments>>>();
+
+                    var assignments = ctx.Assignments.ToList();
+
+                    foreach (var assignment in assignments)
+                    {
+                        IDictionary<Courses, IEnumerable<Assignments>> innerDictionary;
+
+                        if (dictionary.ContainsKey(assignment.Students))
+                        {
+                            innerDictionary = dictionary[assignment.Students];
+                        }
+                        else
+                        {
+                            innerDictionary = new Dictionary<Courses, IEnumerable<Assignments>>();
+                            dictionary.Add(assignment.Students, innerDictionary);
+                        }
+
+                        if (innerDictionary.ContainsKey(assignment.Courses))
+                        {
+                            var list = innerDictionary[assignment.Courses].ToList();
+                            list.Add(assignment);
+
+                            innerDictionary[assignment.Courses] = list;
+                        }
+                        else
+                        {
+                            innerDictionary.Add(assignment.Courses, new Assignments[] { assignment });
+                        }
+                    }
+
+                    return dictionary;
+                }
+            }
+
+            public static IEnumerable<Students> GetStudentsInMoreThanOneCourse() 
+            {
+                using (var ctx = new IndividualProjectBrief_Part_BEntities())
+                {
+                    return ctx.Students.Where(x => x.CoursesStudents.Count > 1).ToList();
+                }
+            }
         }
-
 
         class Program
         {
@@ -320,25 +386,14 @@ namespace IndividualProjectBrief_PartB
 
                 try
                 {
-                    using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
-                    {
-                        var studentspercourse = from i in dbContext.Students_per_Course
-                                                select new { i.Student_FirstName, i.Student_LastName, i.Course_Title };
-                                                
-                        
-                        foreach (var x in studentspercourse)
-                        {
-                            Console.WriteLine(x);
-                        }
-                    }
-                        Run();
+
+                    Run();
 
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }
-
             }
 
             public static void Run()
@@ -437,25 +492,46 @@ namespace IndividualProjectBrief_PartB
                     Console.ForegroundColor = ConsoleColor.Yellow;
 
                     Console.WriteLine("Press 1 to view all of the student records");
-                    Console.WriteLine("Press 2 to view all of the course records");
+                    Console.WriteLine("Press 2 to view all of the trainer records");
                     Console.WriteLine("Press 3 to view all of the assignments records");
-                    Console.WriteLine("Press 4 to view all of the trainer records");
+                    Console.WriteLine("Press 4 to view all of the course records");
+                    Console.WriteLine("Press 5 to view all of the students per course");
+                    Console.WriteLine("Press 6 to view all of the trainers per course");
+                    Console.WriteLine("Press 7 to view all of the assignments per course");
+                    Console.WriteLine("Press 8 to view all of the assignments per course per student");
+                    Console.WriteLine("Press 9 to view all of the students that belong in more than one course");
+
                     Console.WriteLine("Press x to return to the previous menu");
                     Console.ResetColor();
 
                     switch (Console.ReadLine())
                     {
                         case "1":
-                            Reader.GetAllStudents();
+                            Print(Reader.GetAllStudents());
                             break;
                         case "2":
-                            Reader.GetAllCourses();
+                            Print(Reader.GetAllTrainers());
                             break;
                         case "3":
-                            Reader.GetAllAssginments();
+                            Print(Reader.GetAllAssignments());
                             break;
                         case "4":
-                            Reader.GetAllTrainers();
+                            Print(Reader.GetAllCourses());
+                            break;
+                        case "5":
+                            Print(Reader.GetAllStudentsPerCourse());
+                            break;
+                        case "6":
+                            Print(Reader.GetAllTrainersPerCourse());
+                            break;
+                        case "7":
+                            Print(Reader.GetAllAssginmentsPerCourse());
+                            break;
+                        case "8":
+                            Print(Reader.GetAllAssignmentsPerStudentPerCourse());
+                            break;
+                        case "9":
+                            Print(Reader.GetStudentsInMoreThanOneCourse());
                             break;
                         case "x":
                             ContPres = false;
@@ -466,7 +542,31 @@ namespace IndividualProjectBrief_PartB
                 }
             }
 
+            private static void Print(object obj, string prefix = null)
+            {
+                if (obj is IDictionary)
+                {
+                    var dictionary = ((IDictionary)obj);
+                    foreach (var key in dictionary.Keys)
+                    {
+                        Console.WriteLine(key);
 
+                        Print(dictionary[key]);
+                    }                    
+                }
+                else if (obj is IEnumerable)
+                {
+                    foreach (var item in ((IEnumerable)obj))
+                    {
+                        Console.WriteLine(item);
+                    }
+                }
+                else 
+                {
+                    Console.WriteLine(obj);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
