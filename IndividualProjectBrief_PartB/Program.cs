@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.Linq.Expressions;
 
 namespace IndividualProjectBrief_PartB
 {
@@ -41,7 +42,6 @@ namespace IndividualProjectBrief_PartB
                         LastName = lastName,
                         DateOfBirth = dateOfBirth,
                         TuitionFees = fees
-
                     };
 
                     Context.Students.Add(student);
@@ -126,14 +126,11 @@ namespace IndividualProjectBrief_PartB
                     }
 
                 }
-
-
-
             }
         }
 
 
-        public static void AddAssignments() //TODO: Add Assignments to Courses and Students
+        public static void AddAssignments()
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -158,6 +155,7 @@ namespace IndividualProjectBrief_PartB
                     Console.WriteLine("Please enter the Assignment's total mark");
                     int totalMark = Convert.ToInt32(Console.ReadLine());
 
+                    Console.WriteLine("-------------------------------------------");
                     Console.WriteLine("Courses: ");
 
                     var coursesAndStudents = Reader.GetAllStudentsPerCourse();
@@ -173,7 +171,7 @@ namespace IndividualProjectBrief_PartB
                         .Value
                         .Select(x => new SelectItem(x.StudentId, $"{x.FirstName} {x.LastName}"));
 
-                    Console.WriteLine("Courses: ");
+                    Console.WriteLine("Students: ");
 
                     Program.Print(students);
 
@@ -215,18 +213,16 @@ namespace IndividualProjectBrief_PartB
                     {
                         continue;
                     }
-                    Console.ResetColor();
-
                 }
 
             }
         }
 
 
-        public static void AddTrainers() //TODO: Add Trainers to Courses
+        public static void AddTrainers() 
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
-            {
+            {               
                 bool ContT = true;
                 while (ContT)
                 {
@@ -249,10 +245,36 @@ namespace IndividualProjectBrief_PartB
                         LastName = lastName,
                         Subject = subject
                     };
+
+
+                    var courses = Reader.GetAllCourses().Select(x => new SelectItem(x.CourseId, x.Title));
+
+                    Program.Print(courses);
+
+                    Console.WriteLine($"Please select the id of the course to assign trainer with name [{firstName} {lastName}] to");
+
+                    var courseid = (Convert.ToInt32(Console.ReadLine()));
+
+                    var trainerid = trainer.TrainerId;
+
+                    CoursesTrainers ct = new CoursesTrainers()
+                    {
+                        CourseId = courseid,
+                        TrainerId = trainerid
+                    };
+
+
                     Context.Trainers.Add(trainer);
+                    Context.CoursesTrainers.Add(ct);
+                    
                     Context.SaveChanges();
-                    Console.WriteLine("\nRecord added: ");
+
+                    Console.WriteLine("\nTrainer added: ");
                     Console.WriteLine(trainer);
+
+                    Console.WriteLine("\nto course: ");
+                    Console.WriteLine(courses.First(c=>c.Id == courseid));
+
                     Console.ForegroundColor = ConsoleColor.Green;
 
                     Console.WriteLine("\n\nPress enter to continue adding records or 'x' to return to the top menu");
@@ -273,7 +295,7 @@ namespace IndividualProjectBrief_PartB
         public class Reader
         {
             public static IEnumerable<Students> GetAllStudents()
-            {
+            {               
                 using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
                 {
                     return dbContext.Students.ToList();
@@ -294,7 +316,7 @@ namespace IndividualProjectBrief_PartB
                 using (var ctx = new IndividualProjectBrief_Part_BEntities())
                 {
                     return ctx.Assignments.Select(x => new { x.Title, x.Description }).Distinct().ToList()
-                        .Select(x => new Assignments { Title = x.Title, Description = x.Description });
+                        .Select(x => new Assignments { Title = x.Title, Description = x.Description }); 
                 }
             }
 
@@ -327,11 +349,11 @@ namespace IndividualProjectBrief_PartB
 
             public static IDictionary<Courses, IEnumerable<Assignments>> GetAllAssginmentsPerCourse()
             {
-                using (var ctx = new IndividualProjectBrief_Part_BEntities())
+                using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
                 {
                     var dictionary = new Dictionary<Courses, IEnumerable<Assignments>>();
 
-                    var assignments = ctx.Assignments.Select(x => new { x.Title, x.Description, x.Courses })
+                    var assignments = Context.Assignments.Select(x => new { x.Title, x.Description, x.Courses })
                         .Distinct()
                         .ToList()
                         .Select(x => new Assignments { Title = x.Title, Description = x.Description, Courses = x.Courses });
@@ -357,11 +379,11 @@ namespace IndividualProjectBrief_PartB
 
             public static IDictionary<Students, IDictionary<Courses, IEnumerable<Assignments>>> GetAllAssignmentsPerStudentPerCourse()
             {
-                using (var ctx = new IndividualProjectBrief_Part_BEntities())
+                using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
                 {
                     var dictionary = new Dictionary<Students, IDictionary<Courses, IEnumerable<Assignments>>>();
 
-                    var assignments = ctx.Assignments.ToList();
+                    var assignments = Context.Assignments.ToList();
 
                     foreach (var assignment in assignments)
                     {
@@ -396,9 +418,9 @@ namespace IndividualProjectBrief_PartB
 
             public static IEnumerable<Students> GetStudentsInMoreThanOneCourse() 
             {
-                using (var ctx = new IndividualProjectBrief_Part_BEntities())
+                using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
                 {
-                    return ctx.Students.Where(x => x.CoursesStudents.Count > 1).ToList();
+                    return Context.Students.Where(x => x.CoursesStudents.Count > 1).ToList();
                 }
             }
         }
@@ -422,7 +444,7 @@ namespace IndividualProjectBrief_PartB
 
             public static void Run()
             {
-
+                
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.BackgroundColor = ConsoleColor.Red;
@@ -566,7 +588,7 @@ namespace IndividualProjectBrief_PartB
                 }
             }
 
-            public static void Print(object obj, string prefix = null)
+            public static void Print(object obj, string s = null)
             {
                 if (obj is IDictionary)
                 {
@@ -611,6 +633,8 @@ namespace IndividualProjectBrief_PartB
             return $"{Id} - {Value}";
         }
     }
+
+
 }
 
 

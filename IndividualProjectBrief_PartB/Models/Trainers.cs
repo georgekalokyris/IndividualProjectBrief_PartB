@@ -8,9 +8,30 @@ namespace IndividualProjectBrief_PartB
 {
     public partial class Trainers
     {
-        public override string ToString() //TODO: String builder formatting
+        public override string ToString()
         {
-            return ($"Trainer Id: {TrainerId}| FirstName: {FirstName}| LastName: {LastName}| Subject: {Subject}");
+
+            var builder = new StringBuilder();
+
+            builder.AppendFormat($"Trainer Id: {TrainerId}");
+
+            if (!string.IsNullOrEmpty(FirstName))
+            {
+                builder.AppendFormat($"|First Name: {FirstName}");
+            }
+            
+            if (!string.IsNullOrEmpty(LastName))
+            {
+                builder.AppendFormat($"|Last Name: {LastName}");
+            }
+
+            if (!string.IsNullOrEmpty(Subject))
+            {
+                builder.AppendFormat($"|Subject: {Subject}");
+            }
+
+            return builder.ToString();
+
         }
     }
 }

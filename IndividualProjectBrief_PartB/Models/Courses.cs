@@ -8,9 +8,44 @@ namespace IndividualProjectBrief_PartB
 {
     public partial class Courses
     {
-        public override string ToString() //TODO: String builder formatting
+        public override string ToString() 
         {
-            return ($"Course Id: {CourseId}| Title: {Title}| Stream: {Stream}| Type: {Type}| Start Date: {Start_Date:d} | End Date: {End_Date}");
+            var builder = new StringBuilder();
+         
+            builder.AppendFormat($"Course Id: {CourseId}");
+
+            if (!string.IsNullOrWhiteSpace(Title))
+            {
+                builder.AppendFormat($"| Title: {Title}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(Stream))
+            {
+                builder.AppendFormat($"| Stream: {Stream}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(Type))
+            {
+                builder.AppendFormat($"| Type: {Type}");
+            }
+
+            if (Start_Date.HasValue)
+            {
+                builder.AppendFormat($"| Start Date: {Start_Date:d}");
+            }
+            
+            if (End_Date.HasValue)
+            {
+                builder.AppendFormat($"| End Date: {End_Date:d}");
+            }
+
+
+            return builder.ToString();
+        
+        
+        
+        
+        
         }
     }
 }
