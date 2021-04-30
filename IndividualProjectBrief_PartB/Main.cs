@@ -6,6 +6,7 @@ namespace IndividualProjectBrief_PartB
     public class Main
     {
         //TODO: Add comments everywhere
+        //TODO: Clear database
         public static void Run()
         {
 
@@ -50,7 +51,7 @@ namespace IndividualProjectBrief_PartB
             }
         }
 
-        private static void DataManipulation() //TODO: Customisation of the Data Manipulation Menu
+        private static void DataManipulation() 
         {
             Console.ForegroundColor = ConsoleColor.Red;
 

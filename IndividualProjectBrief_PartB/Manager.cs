@@ -6,7 +6,7 @@ namespace IndividualProjectBrief_PartB
     class Manager
     {
 
-        public static void AddStudents() //TODO: Add Students to Courses
+        public static void AddStudents()
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -16,18 +16,25 @@ namespace IndividualProjectBrief_PartB
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
 
-                    Console.WriteLine("---------Adding Students---------");
+                    Console.WriteLine("-------------Adding Students-------------");
+
+                    Main.PrintLine(40, ".");
                     Console.WriteLine("\nPlease enter the student's first name");
                     string firstName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter the student's last name");
+                    Main.PrintLine(40, ".");
+                    Console.WriteLine("\nPlease enter the student's last name");
                     string lastName = Console.ReadLine();
-
-                    Console.WriteLine("Please enter the student's dateOfBirth");
+                    
+                    Main.PrintLine(40, ".");
+                    Console.WriteLine("\nPlease enter the student's dateOfBirth");
                     DateTime dateOfBirth = Convert.ToDateTime(Console.ReadLine());
 
-                    Console.WriteLine("Please enter the amount of the total tuitionFees");
+                    Main.PrintLine(40, ".");
+                    Console.WriteLine("\nPlease enter the amount of the total tuitionFees");
                     int fees = int.Parse(Console.ReadLine());
+                    
+                    Main.PrintLine(40, ".");
 
                     Students student = new Students()
                     {
@@ -40,13 +47,17 @@ namespace IndividualProjectBrief_PartB
                     var courses = Reader.GetAllCourses().Select(x => new SelectItem(x.CourseId, x.Title)).ToList(); ;
 
 
-
-                    Console.WriteLine("Please select a course to assign the student to");
+                    //Assign a course to the student
+                    Console.WriteLine("\nActive courses:");
+                    Main.PrintLine(40, ".");
 
                     Main.Print(courses);
+                    Main.PrintLine(40, ".");
 
+                    Console.WriteLine("\nPlease select the id of the course to assign the student to");
                     var courseid = Convert.ToInt32(Console.ReadLine());
-
+                    Main.PrintLine(40, ".");
+                    Console.WriteLine();
                     CoursesStudents tocourse = new CoursesStudents()
                     {
                         CourseId = courseid,
@@ -56,26 +67,31 @@ namespace IndividualProjectBrief_PartB
                     Context.CoursesStudents.Add(tocourse);
                     Context.Students.Add(student);
 
+                    var course = Reader.GetAllCourses().Where(f => f.CourseId == courseid).First();
+                    Console.WriteLine($"Assignments of {course}");
+                    Main.PrintLine(40, ".");
+
+
                     var assignments = Context.Assignments.Select(x => new { x.AssignmentId, x.Title, x.Description, x.Courses })
                                             .Where(f => f.Courses.CourseId == courseid)
                                             .ToList();
-
-                    var course = Reader.GetAllCourses().Where(f => f.CourseId == courseid).First();
-                    Console.WriteLine("Press 1 to assign any assignment of the course to the student or x to continue");
-                    Console.WriteLine($"Assignments of {course}");
                     Main.Print(assignments.Select(x => $"{x.AssignmentId}, {x.Title}"));
+                    Main.PrintLine(40, ".");
 
+                    Console.WriteLine("\nPress 'y' to assign any assignment of the course to the student or 'n' to bypass this option");
 
                     var opt = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
 
-                    if (opt == "1")
+                    if (opt == "y")
                     {
                         bool more = true;
                         while (more)
                         {
-                            Console.WriteLine("Please provide the id of the assignment, to assign to the student");
+                            Console.WriteLine("\nPlease provide the id of the assignment, to assign to the student");
                             var assignmentid = int.Parse(Console.ReadLine());
+                            Main.PrintLine(40, ".");
 
                             var assignmentTitle = Context.Assignments.FirstOrDefault(c => c.AssignmentId == assignmentid).Title;
 
@@ -101,9 +117,11 @@ namespace IndividualProjectBrief_PartB
                             Context.Assignments.Add(cs);
 
 
-                            Console.WriteLine("Press any button to continue adding assignments or x to return to the previous menu");
+                            Console.WriteLine("\nPress any button to continue adding assignments or x to return to the previous menu");
 
                             var x = Console.ReadLine();
+                            Main.PrintLine(40, ".");
+
                             if (x == "x")
                             {
                                 break;
@@ -112,18 +130,20 @@ namespace IndividualProjectBrief_PartB
                         }
 
                     }
-                    else continue;
+                    
 
 
                     Context.SaveChanges();
 
-                    Console.WriteLine("\nStudent added: ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nStudent added:");
                     Console.WriteLine(student);
                     Console.WriteLine("to Course:");
                     Console.WriteLine(course);
 
                     Console.ForegroundColor = ConsoleColor.Green;
-
+                    Main.PrintLine(40, ".");
+                    
                     Console.WriteLine("\n\nPress enter to continue adding records or 'x' to return to the top menu");
 
                     if (Console.ReadLine() == "x")
@@ -151,21 +171,27 @@ namespace IndividualProjectBrief_PartB
                     Console.ForegroundColor = ConsoleColor.Green;
 
                     Console.WriteLine("---------Adding Courses---------");
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the title of the Course");
+                    Console.WriteLine("\nPlease enter the title of the Course");
                     string title = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the stream of the Course");
+                    Console.WriteLine("\nPlease enter the stream of the Course");
                     string stream = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the type of the Course");
+                    Console.WriteLine("\nPlease enter the type of the Course");
                     string type = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the course's starting date");
+                    Console.WriteLine("\nPlease enter the course's starting date");
                     DateTime startDate = Convert.ToDateTime(Console.ReadLine());
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the course's end date");
+                    Console.WriteLine("\nPlease enter the course's end date");
                     DateTime endDate = Convert.ToDateTime(Console.ReadLine());
+                    Main.PrintLine(40, ".");
 
                     Courses newcourse = new Courses()
                     {
@@ -183,10 +209,13 @@ namespace IndividualProjectBrief_PartB
 
                     Console.WriteLine("\nRecord added: ");
                     Console.WriteLine(newcourse);
+                    Main.PrintLine(newcourse.ToString().Length, ".");
+
                     Console.ForegroundColor = ConsoleColor.Green;
 
+
                     Console.WriteLine("\n\nPress enter to continue adding records or 'x' to return to the top menu");
-                    Console.ResetColor();
+
 
                     if (Console.ReadLine() == "x")
                     {
@@ -213,44 +242,54 @@ namespace IndividualProjectBrief_PartB
                     Console.ForegroundColor = ConsoleColor.Green;
 
                     Console.WriteLine("---------Adding Assignments---------");
-                    Console.WriteLine("Please enter the title of the Assignment");
+                    Main.PrintLine(40, ".");
+
+                    Console.WriteLine("\nPlease enter the title of the Assignment");
                     string title = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the description of the Assignment");
+                    Console.WriteLine("\nPlease enter the description of the Assignment");
                     string description = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the Assignment's final submission date");
+                    Console.WriteLine("\nPlease enter the Assignment's final submission date");
                     DateTime subDateTime = Convert.ToDateTime(Console.ReadLine());
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the Assignment's oral mark");
+                    Console.WriteLine("\nPlease enter the Assignment's oral mark");
                     int oralMark = Convert.ToInt32(Console.ReadLine());
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the Assignment's total mark");
+                    Console.WriteLine("\nPlease enter the Assignment's total mark");
                     int totalMark = Convert.ToInt32(Console.ReadLine());
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("-------------------------------------------");
-                    Console.WriteLine("Courses: ");
-
+                    Console.WriteLine("\nActive Courses:");
                     var coursesAndStudents = Reader.GetAllStudentsPerCourse();
-
+                    Main.PrintLine(40, ".");
+                    Console.WriteLine();
                     Main.Print(coursesAndStudents.Select(x => new SelectItem(x.Key.CourseId, x.Key.Title)));
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the course's id for the assignment");
+                    Console.WriteLine("\nPlease enter the course's id for the assignment");
 
                     int courseId = Convert.ToInt32(Console.ReadLine());
+                    Main.PrintLine(40, ".");
 
                     var students = coursesAndStudents
                         .First(x => x.Key.CourseId == courseId)
                         .Value
                         .Select(x => new SelectItem(x.StudentId, $"{x.FirstName} {x.LastName}"));
 
-                    Console.WriteLine("Students: ");
+                    Console.WriteLine("\nActive Students in selected course: ");
+                    Main.PrintLine(40, ".");
 
                     Main.Print(students);
 
-                    Console.WriteLine("Please enter the student's id for the assignment");
+                    Console.WriteLine("\nPlease enter the student's id for the assignment");
 
                     int studentId = Convert.ToInt32(Console.ReadLine());
+                    Main.PrintLine(40, ".");
 
                     Assignments assignment = new Assignments()
                     {
@@ -268,11 +307,13 @@ namespace IndividualProjectBrief_PartB
 
                     Console.ForegroundColor = ConsoleColor.Red;
 
-                    Console.WriteLine("\nRecord added: ");
+                    Console.WriteLine("\nAssignment added:");
                     Console.WriteLine(assignment);
-
+                    Console.WriteLine("to Student:");
+                    Console.WriteLine(Context.Students.FirstOrDefault(x => x.StudentId == studentId));
 
                     Console.ForegroundColor = ConsoleColor.Green;
+                    Main.PrintLine(40, ".");
 
                     Console.WriteLine("\n\nPress enter to continue adding records or 'x' to return to the top menu");
                     Console.ResetColor();
@@ -287,7 +328,6 @@ namespace IndividualProjectBrief_PartB
                         continue;
                     }
                 }
-
             }
         }
 
@@ -302,15 +342,19 @@ namespace IndividualProjectBrief_PartB
                     Console.ForegroundColor = ConsoleColor.Green;
 
                     Console.WriteLine("---------Adding Trainers---------");
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the trainer's first name");
+                    Console.WriteLine("\nPlease enter the trainer's first name");
                     string firstName = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the trainer's last name");
+                    Console.WriteLine("\nPlease enter the trainer's last name");
                     string lastName = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
-                    Console.WriteLine("Please enter the trainer's subject");
+                    Console.WriteLine("\nPlease enter the trainer's subject");
                     string subject = Console.ReadLine();
+                    Main.PrintLine(40, ".");
 
                     Trainers trainer = new Trainers()
                     {
@@ -319,12 +363,12 @@ namespace IndividualProjectBrief_PartB
                         Subject = subject
                     };
 
-
                     var courses = Reader.GetAllCourses().Select(x => new SelectItem(x.CourseId, x.Title));
+                    Main.PrintLine(40, ".");
 
                     Main.Print(courses);
 
-                    Console.WriteLine($"Please select the id of the course to assign trainer with name [{firstName} {lastName}] to");
+                    Console.WriteLine($"\nPlease select the id of the course to assign the trainer with name [{firstName} {lastName}] to");
 
                     var courseid = (Convert.ToInt32(Console.ReadLine()));
 
@@ -342,16 +386,20 @@ namespace IndividualProjectBrief_PartB
 
                     Context.SaveChanges();
 
+                    Main.PrintLine(40, ".");
+                    Console.ForegroundColor = ConsoleColor.Red;
+
                     Console.WriteLine("\nTrainer added: ");
                     Console.WriteLine(trainer);
 
-                    Console.WriteLine("\nto Course: ");
+                    Console.WriteLine("to Course: ");
                     Console.WriteLine(courses.First(c => c.Id == courseid));
 
                     Console.ForegroundColor = ConsoleColor.Green;
+                    Main.PrintLine(40, ".");
 
                     Console.WriteLine("\n\nPress enter to continue adding records or 'x' to return to the top menu");
-
+                    
                     if (Console.ReadLine() == "x")
                     {
                         ContT = false;
@@ -364,13 +412,7 @@ namespace IndividualProjectBrief_PartB
                 }
             }
         }
-
-
-
-
     }
-
-
 }
 
 
