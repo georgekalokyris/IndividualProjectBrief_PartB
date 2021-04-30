@@ -6,6 +6,7 @@ namespace IndividualProjectBrief_PartB
 {
     public class Reader
     {
+        //List of all Students (all properties)
         public static IEnumerable<Students> GetAllStudents()
         {
             using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
@@ -14,7 +15,7 @@ namespace IndividualProjectBrief_PartB
             }
         }
 
-
+        //List of all Courses (all properties)
         public static IEnumerable<Courses> GetAllCourses()
         {
             using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
@@ -23,6 +24,8 @@ namespace IndividualProjectBrief_PartB
             }
 
         }
+        
+        //List of all Assignments (title, description)
         public static IEnumerable<Assignments> GetAllAssignments()
         {
             using (var ctx = new IndividualProjectBrief_Part_BEntities())
@@ -31,7 +34,8 @@ namespace IndividualProjectBrief_PartB
                     .Select(x => new Assignments { Title = x.Title, Description = x.Description });
             }
         }
-
+        
+        //List of all Trainers (all properties)
         public static IEnumerable<Trainers> GetAllTrainers()
         {
             using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
@@ -41,24 +45,25 @@ namespace IndividualProjectBrief_PartB
 
         }
 
+        //List of all Courses - Students
         public static IDictionary<Courses, IEnumerable<Students>> GetAllStudentsPerCourse()
         {
             using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
             {
                 return dbContext.Courses.Include(x => x.CoursesStudents.Select(f => f.Students)).Where(x => x.CoursesStudents.Any()).ToDictionary(x => x, x => x.CoursesStudents.Select(f => f.Students));
-
             }
         }
-
+        
+        //Dictionary of Courses and Trainers
         public static IDictionary<Courses, IEnumerable<Trainers>> GetAllTrainersPerCourse()
         {
             using (IndividualProjectBrief_Part_BEntities dbContext = new IndividualProjectBrief_Part_BEntities())
             {
-
                 return dbContext.Courses.Include(x => x.CoursesTrainers.Select(f => f.Trainers)).Where(x => x.CoursesTrainers.Any()).ToDictionary(x => x, x => x.CoursesTrainers.Select(f => f.Trainers));
             }
         }
-
+        
+        //Dictionary of Courses and Assignments
         public static IDictionary<Courses, IEnumerable<Assignments>> GetAllAssginmentsPerCourse()
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
@@ -89,6 +94,7 @@ namespace IndividualProjectBrief_PartB
             }
         }
 
+        //Dictionary of Students Containing Dictionary of Courses and Assignments
         public static IDictionary<Students, IDictionary<Courses, IEnumerable<Assignments>>> GetAllAssignmentsPerStudentPerCourse()
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
@@ -128,6 +134,7 @@ namespace IndividualProjectBrief_PartB
             }
         }
 
+        //List of students in more than one course
         public static IEnumerable<Students> GetStudentsInMoreThanOneCourse()
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())

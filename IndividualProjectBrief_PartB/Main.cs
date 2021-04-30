@@ -5,8 +5,7 @@ namespace IndividualProjectBrief_PartB
 {
     public class Main
     {
-        //TODO: Add comments everywhere
-        //TODO: Clear database
+        
         public static void Run()
         {
 
@@ -50,8 +49,7 @@ namespace IndividualProjectBrief_PartB
                 Console.ResetColor();
             }
         }
-
-        private static void DataManipulation() 
+        private static void DataManipulation() //Creates new records
         {
             Console.ForegroundColor = ConsoleColor.Red;
 
@@ -95,9 +93,8 @@ namespace IndividualProjectBrief_PartB
                         continue;
                 }
             }
-        }
-
-        public static void DataPresentation()
+        } 
+        public static void DataPresentation() //Presents existing records
         {
             Console.ForegroundColor = ConsoleColor.Red;
 
@@ -159,9 +156,8 @@ namespace IndividualProjectBrief_PartB
 
 
             }
-        }
-
-        public static void Print(object obj, string s = null)
+        } 
+        public static void Print(object obj, string s = null) //Prints existing Dictionaries containing IEnumerables or IEnumerables
         {
             if (obj is IDictionary)
             {
@@ -191,16 +187,14 @@ namespace IndividualProjectBrief_PartB
                 Console.WriteLine(obj);
             }
             Console.WriteLine();
-        }
-
-        public static void PrintLine(int x, string sym)
+        } 
+        public static void PrintLine(int x, string sym) //Prints a specific string the number of times specified
         {
             for (int i= 0; i <= x; i++)
             {
                 Console.Write($"{sym}");
             }
-        }
-
+        } 
     }
 
 }

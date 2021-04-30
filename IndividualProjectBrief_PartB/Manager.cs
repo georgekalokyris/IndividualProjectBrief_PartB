@@ -5,8 +5,7 @@ namespace IndividualProjectBrief_PartB
 {
     class Manager
     {
-
-        public static void AddStudents()
+        public static void AddStudents() //Creates new Students and allocates them to a Course and to the Assignments of the course
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -35,7 +34,6 @@ namespace IndividualProjectBrief_PartB
                     int fees = int.Parse(Console.ReadLine());
                     
                     Main.PrintLine(40, ".");
-
                     Students student = new Students()
                     {
                         FirstName = firstName,
@@ -44,8 +42,7 @@ namespace IndividualProjectBrief_PartB
                         TuitionFees = fees
                     };
 
-                    var courses = Reader.GetAllCourses().Select(x => new SelectItem(x.CourseId, x.Title)).ToList(); ;
-
+                    var courses = Reader.GetAllCourses().Select(x => new SelectItem(x.CourseId, x.Title)).ToList();
 
                     //Assign a course to the student
                     Console.WriteLine("\nActive courses:");
@@ -159,7 +156,6 @@ namespace IndividualProjectBrief_PartB
             }
         }
 
-
         public static void AddCourses()
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
@@ -229,10 +225,9 @@ namespace IndividualProjectBrief_PartB
 
                 }
             }
-        }
+        } //Creates new Courses
 
-
-        public static void AddAssignments()
+        public static void AddAssignments() //Creates new Assignments and associates it with a Course and Student
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
@@ -331,7 +326,6 @@ namespace IndividualProjectBrief_PartB
             }
         }
 
-
         public static void AddTrainers()
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
@@ -411,7 +405,7 @@ namespace IndividualProjectBrief_PartB
                     }
                 }
             }
-        }
+        } //Creates new Trainers and allocates them to a Course
     }
 }
 
