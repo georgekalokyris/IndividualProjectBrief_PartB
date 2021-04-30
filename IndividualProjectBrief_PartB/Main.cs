@@ -157,7 +157,7 @@ namespace IndividualProjectBrief_PartB
 
             }
         } 
-        public static void Print(object obj, string s = null) //Prints existing Dictionaries containing IEnumerables or IEnumerables
+        public static void Print(object obj, string s = null) //Prints existing records 
         {
             if (obj is IDictionary)
             {

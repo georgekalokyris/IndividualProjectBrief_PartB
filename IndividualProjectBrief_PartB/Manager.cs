@@ -227,7 +227,7 @@ namespace IndividualProjectBrief_PartB
             }
         } //Creates new Courses
 
-        public static void AddAssignments() //Creates new Assignments and associates it with a Course and Student
+        public static void AddAssignments() //Creates new Assignments and associates them with a Course and Student
         {
             using (IndividualProjectBrief_Part_BEntities Context = new IndividualProjectBrief_Part_BEntities())
             {
